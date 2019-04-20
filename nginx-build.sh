@@ -639,6 +639,12 @@ _download_modules() {
         }; } || {
             git clone https://github.com/gnosek/nginx-upstream-fair.git
         }
+        ## ngx-fancyindex
+        { [ -d "$DIR_SRC/ngx-fancyindex" ] && {
+            git -C "$DIR_SRC/ngx-fancyindex" pull origin master
+        }; } || {
+            https://github.com/aperezdc/ngx-fancyindex.git
+        }        
 
         echo "### additionals modules downloaded ###"
     } >> /tmp/nginx-ee.log 2>&1
@@ -1103,7 +1109,8 @@ _configure_nginx() {
         --add-dynamic-module=../ngx_http_auth_pam_module \
         --add-module=../nginx-module-vts \
         --add-dynamic-module=../ipscrubtmp/ipscrub \
-        --add-dynamic-module=../nginx-upstream-fair"
+        --add-dynamic-module=../nginx-upstream-fair \
+        --add-dynamic-module=..ngx-fancyindex"
         else
             NGINX_THIRD_MODULES="--add-module=../ngx_http_substitutions_filter_module \
         --add-module=../srcache-nginx-module \
@@ -1115,7 +1122,8 @@ _configure_nginx() {
         --add-module=../ngx_http_auth_pam_module \
         --add-module=../nginx-module-vts \
         --add-module=../ipscrubtmp/ipscrub \
-        --add-dynamic-module=../nginx-upstream-fair"
+        --add-dynamic-module=../nginx-upstream-fair \
+        --add-dynamic-module=../nginx-upstream-fair "
         fi
     else
         NGINX_THIRD_MODULES="$OVERRIDE_NGINX_ADDITIONAL_MODULES"
