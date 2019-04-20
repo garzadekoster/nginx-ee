@@ -632,6 +632,13 @@ _download_modules() {
         }; } || {
             git clone https://github.com/masonicboom/ipscrub.git ipscrubtmp
         }
+        
+        ## nginx-upstream-fair module
+        { [ -d "$DIR_SRC/nginx-upstream-fair" ] && {
+            git -C "$DIR_SRC/ipscrubtmp" pull origin master
+        }; } || {
+            git clone https://github.com/gnosek/nginx-upstream-fair.git
+        }
 
         echo "### additionals modules downloaded ###"
     } >> /tmp/nginx-ee.log 2>&1
