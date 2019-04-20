@@ -633,9 +633,9 @@ _download_modules() {
             git clone https://github.com/masonicboom/ipscrub.git ipscrubtmp
         }
         
-        ## nginx-upstream-fair module
+        ## nginx-upstream-fair
         { [ -d "$DIR_SRC/nginx-upstream-fair" ] && {
-            git -C "$DIR_SRC/ipscrubtmp" pull origin master
+            git -C "$DIR_SRC/nginx-upstream-fair" pull origin master
         }; } || {
             git clone https://github.com/gnosek/nginx-upstream-fair.git
         }
@@ -1102,7 +1102,8 @@ _configure_nginx() {
         --add-module=../set-misc-nginx-module \
         --add-dynamic-module=../ngx_http_auth_pam_module \
         --add-module=../nginx-module-vts \
-        --add-dynamic-module=../ipscrubtmp/ipscrub"
+        --add-dynamic-module=../ipscrubtmp/ipscrub \
+        --add-dynamic-module=../nginx-upstream-fair"
         else
             NGINX_THIRD_MODULES="--add-module=../ngx_http_substitutions_filter_module \
         --add-module=../srcache-nginx-module \
@@ -1113,7 +1114,8 @@ _configure_nginx() {
         --add-module=../set-misc-nginx-module \
         --add-module=../ngx_http_auth_pam_module \
         --add-module=../nginx-module-vts \
-        --add-module=../ipscrubtmp/ipscrub"
+        --add-module=../ipscrubtmp/ipscrub \
+        --add-dynamic-module=../nginx-upstream-fair"
         fi
     else
         NGINX_THIRD_MODULES="$OVERRIDE_NGINX_ADDITIONAL_MODULES"
